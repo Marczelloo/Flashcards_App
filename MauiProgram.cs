@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Flashcards_.Custom_Controls;
+using Microsoft.Extensions.Logging;
+using Flashcards_.Platforms;
 
 namespace Flashcards_
 {
@@ -18,7 +20,13 @@ namespace Flashcards_
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-
+            Microsoft.Maui.Handlers.ElementHandler.ElementMapper.AppendToMapping("Classic", (handler, view) =>
+            {
+                if (view is BasicEntry)
+                {
+                    EntryMapper.Map(handler, view);
+                }
+            });
             return builder.Build();
         }
     }
